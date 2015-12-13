@@ -11,13 +11,17 @@ import com.haiqiu.serivce.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -30,6 +34,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/hello")
+@SessionAttributes(value = {"user"})
 public class HelloWorldController {
 
 	@Autowired
@@ -40,6 +45,13 @@ public class HelloWorldController {
 	
 	
 	//http://localhost:8081/myframe/hello/sayHello/1.htmls?name=aa&age=15
+	/**
+	 * 访问数据模型 通过ModelAndView
+	 * @param name
+	 * @param age
+	 * @param id
+	 * @return
+	 */
     @RequestMapping(value = "/sayHello/{id}",method=RequestMethod.GET,params="name")
     public ModelAndView sayHello(@RequestParam("name") String name,@RequestParam(name="age",required=true) String age,@PathVariable int id){
        String info = helloSerivce.sayHello(name);
@@ -51,6 +63,70 @@ public class HelloWorldController {
         model.addObject("info", info);
         return model;
     }
+    
+    /**
+     * http://localhost:8081/myframe/hello/sayHello2.htmls?name=aaa&id=1
+     * 访问数据模型通过@ModelAttribute 
+     * Spring MVC将HTTP请求数据绑定到user入参中，然后再将user对象添加到数据模型中
+     * @param user
+     * @return
+     */
+    @RequestMapping(value="/sayHello2")
+    public  String sayHello2(@ModelAttribute("user") User user){
+    	user.setPhone("18664315576");
+    	return "/user/hello";
+    }
+    
+    @ModelAttribute("user")
+    public User getUser(){
+    	User user = new User();
+    	user.setId(1001); 
+    	return user;
+    }
+    //http://localhost:8081/myframe/hello/handle71.htmls
+    @RequestMapping(value = "/handle71")
+	public String  handle71(@ModelAttribute("user") User user){
+		user.setName("John");
+		return "redirect:/hello/handle72.htmls";
+	}
+
+	@RequestMapping(value = "/handle72")
+	public String  handle72(ModelMap modelMap,SessionStatus sessionStatus){
+		User user = (User)modelMap.get("user");
+		if(user != null){ 
+			user.setName("Jetty");
+			sessionStatus.setComplete();
+		}
+		return "/user/hello";
+	}
+    
+    /**
+     * 如果希望在多个请求之间共用某个模型属性数据，则可以在控制器类标注一个@SessionAttributes，Spring MVC会将模型中对应的属性暂存到HttpSession中
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping(value="/getSessionAttributes")
+    public  String SessionAttributes(ModelMap modelMap,SessionStatus sessionStatus){
+
+    	User user = (User) modelMap.get("user");
+    	if(user!=null){
+    		user.setName("clear");
+    		sessionStatus.setComplete();
+    	}
+    	
+    	return "/user/hello";
+    }
+    
+
+
+/*    @RequestMapping(value = "/sayHello3")
+    public String  sayHello3(ModelMap modelMap){
+         modelMap.addAttribute("testAttr","value1");
+         User user = (User)modelMap.get("user");
+         user.sete("tom");		
+         return "/user/hello";
+    }*/
+
     
     //http://localhost:8081/myframe/hello/getAllUser.htmls
     @RequestMapping(value="/getAllUser")
