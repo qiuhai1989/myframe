@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.List;
 
+import com.alibaba.druid.pool.vendor.SybaseExceptionSorter;
 import com.haiqiu.entity.User;
 import com.haiqiu.serivce.HelloSerivce;
 import com.haiqiu.serivce.UserService;
@@ -12,15 +13,7 @@ import com.haiqiu.serivce.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -77,12 +70,12 @@ public class HelloWorldController {
     	return "/user/hello";
     }
     
-    @ModelAttribute("user")
+/*    @ModelAttribute("user")
     public User getUser(){
     	User user = new User();
     	user.setId(1001); 
     	return user;
-    }
+    }*/
     //http://localhost:8081/myframe/hello/handle71.htmls
     @RequestMapping(value = "/handle71")
 	public String  handle71(@ModelAttribute("user") User user){
@@ -144,8 +137,35 @@ public class HelloWorldController {
     public User testPojo(User user){
     	return user;
     }
-    
-    
+
+
+	@RequestMapping(value="/addUser",method = RequestMethod.GET)
+	public String toAddUser( User user){
+		return "/user/addUser";
+	}
+
+
+	@RequestMapping(value="/addUser",method = RequestMethod.POST)
+	@ResponseBody
+	public String addUser(@RequestBody User user){
+		System.out.println(user);
+		return "success";
+	}
+
+	@RequestMapping(value="/addUser2",method = RequestMethod.POST)
+	@ResponseBody
+	public String addUser2(User user){
+		System.out.println(user);
+		return "success";
+	}
+
+	@RequestMapping(value="/addUser3",method = RequestMethod.POST)
+	@ResponseBody
+	public String addUser3(@RequestBody User user){
+		System.out.println(user);
+		return "success";
+	}
+
     @RequestMapping(value="/servletApi")
     @ResponseBody
     public void testServletApi(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
