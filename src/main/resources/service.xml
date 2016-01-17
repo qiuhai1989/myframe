@@ -14,4 +14,5 @@
     <context:component-scan base-package="com.haiqiu.serivce"  />
 <!--        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />-->
 
+    <import resource="spring-cxf.xml"/>
 </beans>

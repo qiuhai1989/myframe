@@ -154,6 +154,18 @@
 			<version>${version.log4j}</version>
 		</dependency>
 
+		<!-- CXF -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>3.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>3.1.4</version>
+        </dependency>
+        <!-- CXF -->
 	</dependencies>
 	<build>
 		<plugins>
