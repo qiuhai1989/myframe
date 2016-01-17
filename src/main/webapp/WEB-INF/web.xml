@@ -9,6 +9,26 @@
         <param-value>classpath*:service.xml</param-value>
     </context-param>
 
+	<context-param> 
+        <param-name>log4jConfigLocation</param-name> 
+        <param-value>classpath:log4j.properties</param-value> 
+	</context-param>
+	<!-- 开一条watchdog线程每60秒扫描一下配置文件的变化 -->  
+	<context-param>  
+	    <param-name>log4jRefreshInterval</param-name>  
+	    <param-value>600000</param-value>  
+	</context-param> 
+
+	<servlet>
+		<servlet-name>download</servlet-name>
+		<servlet-class>com.haiqiu.web.DownLoadServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>download</servlet-name>
+		<url-pattern>/download.do</url-pattern>
+	</servlet-mapping>
+
     <servlet>
         <servlet-name>springmvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -51,6 +71,11 @@
     <listener>
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
     </listener>
+    
+    <listener>
+   		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+    
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>

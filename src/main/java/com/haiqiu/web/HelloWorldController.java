@@ -10,6 +10,8 @@ import com.haiqiu.entity.User;
 import com.haiqiu.serivce.HelloSerivce;
 import com.haiqiu.serivce.UserService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,7 +31,8 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/hello")
 @SessionAttributes(value = {"user"})
 public class HelloWorldController {
-
+	private static Logger log = LoggerFactory
+			.getLogger(HelloWorldController.class);
 	@Autowired
     private HelloSerivce helloSerivce;
 	
@@ -47,6 +50,7 @@ public class HelloWorldController {
 	 */
     @RequestMapping(value = "/sayHello/{id}",method=RequestMethod.GET,params="name")
     public ModelAndView sayHello(@RequestParam("name") String name,@RequestParam(name="age",required=true) String age,@PathVariable int id){
+    	log.info("name="+name+",age="+age);
        String info = helloSerivce.sayHello(name);
         System.out.println(info);
         System.out.println("id="+id);
@@ -159,9 +163,9 @@ public class HelloWorldController {
 		return "success";
 	}
 
-	@RequestMapping(value="/addUser3",method = RequestMethod.POST)
+	@RequestMapping(value="addUser3",method = RequestMethod.POST)
 	@ResponseBody
-	public String addUser3(@RequestBody User user){
+	public String addUser3(@ModelAttribute("user")User user){
 		System.out.println(user);
 		return "success";
 	}

@@ -28,17 +28,19 @@
 				});
 			});
 			$('#saveBtn3').click(function(){
-				console.log($('#userForm').serializeArray());
+				var content = $("#userForm").serialize();
+				console.log(content);
 				$.ajax({
 					type: "POST",
 					url: "/myframe/hello/addUser.htmls",
+					data: content ,
 					dataType: "json",
-					contentType: "application/json",
-					data: $("#userForm").serializeArray(),
-					success: function (result) {
-//						goBack();
+					success: function (msg) {
+
 					}
 				});
+
+
 			});
 		});
 	</script>
@@ -48,6 +50,7 @@
 <form id="userForm" action="/myframe/hello/addUser2.htmls" method="post">
 	姓名：<input name="name" id="name"/><br>
 	电话:<input name="phone" id="phone"/><br>
+	<input  name="id">
 	<input type="button" value="提交" id="saveBtn"/>
 	<input type="submit" value="提交2" id="subBtn"/>
 	<input type="button" value="提交3" id="saveBtn3"/>
