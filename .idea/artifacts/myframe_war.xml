@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="myframe:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="myframe.war">
-      <element id="artifact" artifact-name="myframe:war exploded" />
-    </root>
-  </artifact>
-</component>
