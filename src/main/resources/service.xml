@@ -11,7 +11,24 @@
     </bean>
     <bean id="sayCN" class="hello.HelloServiceCNImpl"></bean>-->
 
+
+    <context:property-placeholder location="classpath:jdbc.properties" />
+
     <context:component-scan base-package="com.haiqiu.serivce"  />
 <!--        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />-->
 
+    <bean id="categoryService" class="com.haiqiu.rest.CategoryService">
+
+    </bean>
+
+
+    <bean id="categoryDAO" class="com.haiqiu.dao.CategoryDAO">
+        <!--  wire dependency-->
+    </bean>
+
+
+
+
+    <import resource="spring-cxf.xml"/>
+    <import resource="spring-cxf-rest.xml"/>
 </beans>
