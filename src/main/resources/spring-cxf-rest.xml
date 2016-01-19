@@ -27,6 +27,10 @@
         <jaxrs:serviceBeans>
             <ref bean="categoryService" />
         </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <!-- JSON格式转换 -->
+            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+        </jaxrs:providers>
     </jaxrs:server>
 
 
