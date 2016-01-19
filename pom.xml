@@ -17,6 +17,7 @@
 		<version.commons-lang3>3.1</version.commons-lang3>
 		<version.slf4j>1.7.9</version.slf4j>
 		<version.log4j>1.2.17</version.log4j>
+		<version.cxf>3.1.4</version.cxf>
 	</properties>
 
 	<dependencies>
@@ -155,17 +156,24 @@
 		</dependency>
 
 		<!-- CXF -->
+		<!--cxf webservice -->
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>3.1.4</version>
+            <version>${version.cxf}</version>
         </dependency>
+		<!--cxf rest -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxrs</artifactId>
+			<version>${version.cxf}</version>
+		</dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
-            <version>3.1.4</version>
+            <version>${version.cxf}</version>
         </dependency>
-        <!-- CXF -->
+		<!-- CXF -->
 	</dependencies>
 	<build>
 		<plugins>
