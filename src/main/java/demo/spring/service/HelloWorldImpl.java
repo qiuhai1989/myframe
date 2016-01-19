@@ -26,6 +26,7 @@ import javax.jws.soap.SOAPBinding;
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class HelloWorldImpl implements HelloWorld {
 
+    //http://localhost:8081/myframe/services/HelloWorld?wsdl
     public String sayHi(String text) {
         System.out.println("sayHi called");
         return "Hello " + text;
