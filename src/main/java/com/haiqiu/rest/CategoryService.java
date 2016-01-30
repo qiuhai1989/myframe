@@ -3,6 +3,7 @@ package com.haiqiu.rest;
 import com.haiqiu.dao.CategoryDAO;
 import com.haiqiu.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;

@@ -33,10 +33,13 @@
         </jaxrs:features>
         <jaxrs:serviceBeans>
             <ref bean="categoryService" />
+            <ref bean="ILotterySerivceImpl"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <!-- JSON格式转换 -->
             <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+            <!-- 异常捕获 -->
+            <bean class="com.haiqiu.exception.InvokeFaultExceptionMapper" />
         </jaxrs:providers>
         <!-- 支持的协议 -->
         <jaxrs:extensionMappings>

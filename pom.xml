@@ -18,6 +18,9 @@
 		<version.slf4j>1.7.9</version.slf4j>
 		<version.log4j>1.2.17</version.log4j>
 		<version.cxf>3.1.4</version.cxf>
+		<version.aspectjweaver>1.8.4</version.aspectjweaver>
+		<version.mybatis>3.2.8</version.mybatis>
+		<version.mybatis-spring>1.2.2</version.mybatis-spring>
 	</properties>
 
 	<dependencies>
@@ -39,6 +42,7 @@
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -83,14 +87,21 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
+			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
+			<artifactId>spring-tx</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!-- aspectjweaver(Spring依赖的jar)  -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${version.aspectjweaver}</version>
+		</dependency>
+
 		<!-- alibaba -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -178,7 +189,25 @@
 			<artifactId>jackson-jaxrs-json-provider</artifactId>
 			<version>2.2.3</version>
 		</dependency>
-		<!-- CXF -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-extension-providers</artifactId>
+			<version>${version.cxf}</version>
+		</dependency>
+
+		<!-- mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${version.mybatis}</version>
+		</dependency>
+
+		<!-- mybatis-spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${version.mybatis-spring}</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

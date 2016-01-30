@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haiqiu.lottery.dao.LotteryActivityMapper">
+	<resultMap id="BaseResultMap" type="com.haiqiu.lottery.entity.LotteryActivity" >
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="hb_type" property="hbType" jdbcType="BIGINT" />
+		<result column="am_type" property="amType" jdbcType="VARCHAR" />
+		<result column="wishing" property="wishing" jdbcType="VARCHAR" />
+		<result column="sign" property="sign" jdbcType="VARCHAR" />
+		<result column="total_num" property="totalAmount" jdbcType="FLOAT" />
+		<result column="total_amount" property="totalNum" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+<!--
+	<resultMap id="BaseResultMapDto" type="com.cap.plugin.biz.cms.dto.ContentCategoryDto" extends="BaseResultMap">
+
+	</resultMap>-->
+
+	<sql id="Base_Column_List" >
+		id, hb_type, am_type, wishing, sign, total_num, total_amount, create_time, modify_time
+	</sql>
+
+
+	<insert id="insert" parameterType="com.haiqiu.lottery.entity.LotteryActivity" >
+		<selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+			SELECT LAST_INSERT_ID() as id
+		</selectKey>
+		insert into Lottery_Activity (hb_type, amt_type, total_amount,
+		total_num, wishing, sign,create_time, modify_time)
+		values (#{hbType,jdbcType=VARCHAR}, #{amType,jdbcType=VARCHAR}, #{totalAmount,jdbcType=INTEGER},
+		#{totalNum,jdbcType=INTEGER}, #{wishing,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR},
+		now(), now());
+	</insert>
+
+</mapper>
