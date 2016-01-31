@@ -2,11 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.haiqiu.lottery.dao.LotteryItemMapper">
 
-<!--
+	<resultMap id="itemMap" type="com.haiqiu.lottery.entity.LotteryItem">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="lottery_id" jdbcType="BIGINT"  property="lotteryId" />
+		<result column="amount" jdbcType="FLOAT"  property="amount" />
+		<result column="wishing" jdbcType="VARCHAR"  property="wishing" />
+		<result column="is_open" jdbcType="BIT"  property="isOpen" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
 	<sql id="Base_Column_List" >
-		id, hb_type, am_type, wishing, sign, total_num, total_amount, create_time, modify_time
+		id, lottery_id, amount, wishing, is_open, create_time, modify_time
 	</sql>
--->
+
 
 
 	<select id="saveLotteryItemList" parameterType="java.util.List">
@@ -19,5 +28,39 @@
 			(#{item.lotteryId,jdbcType=INTEGER},#{item.amount,jdbcType=FLOAT},#{item.wishing,jdbcType=VARCHAR},#{item.isOpen,jdbcType=BIT},#{item.createTime,jdbcType=DATE},#{item.createTime,jdbcType=DATE})
 		</foreach>
 	</select>
+
+	<select id="getItemByLotteryId" parameterType="java.util.Map" resultMap="itemMap" >
+		SELECT
+		<include refid="Base_Column_List" />
+		from Lottery_Item
+		where lottery_id = #{id}
+		and is_open = FALSE
+		limit 1;
+	</select>
+	
+	<update id="updateLotteryItem" parameterType="com.haiqiu.lottery.entity.LotteryItem">
+		update Lottery_Item
+		<set>
+				<if test="lotteryId!=null">
+					lottery_id =#{lotteryId,jdbcType=BIGINT},
+				</if>
+				<if test="amount!=null">
+					amount =#{amount,jdbcType=FLOAT},
+				</if>
+				<if test="wishing!=null">
+					wishing =#{wishing,jdbcType=VARCHAR},
+				</if>
+				<if test="isOpen!=null">
+					is_open=#{isOpen,jdbcType=BIT},
+				</if>
+				<if test="createTime!=null">
+					create_time=#{createTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="modifyTime!=null">
+					modify_time =#{modifyTime,jdbcType=TIMESTAMP},
+				</if>
+		</set>
+		where id =  #{id,jdbcType=BIGINT}
+	</update>
 
 </mapper>

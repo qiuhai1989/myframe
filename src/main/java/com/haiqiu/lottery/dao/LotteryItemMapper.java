@@ -14,6 +14,10 @@ public interface LotteryItemMapper {
 
     public void saveLotteryItemList(@Param("list")List<LotteryItem> list);
 
+    public LotteryItem getItemByLotteryId(@Param("id") Long id);
+
+    public void updateLotteryItem(LotteryItem item);
+
 }
 
 

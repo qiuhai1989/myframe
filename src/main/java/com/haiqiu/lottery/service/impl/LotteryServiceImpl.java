@@ -1,6 +1,7 @@
 package com.haiqiu.lottery.service.impl;
 
 import com.haiqiu.entity.Category;
+import com.haiqiu.exception.ServiceException;
 import com.haiqiu.lottery.dao.LotteryActivityMapper;
 import com.haiqiu.lottery.dao.LotteryItemMapper;
 import com.haiqiu.lottery.entity.LotteryActivity;
@@ -36,8 +37,13 @@ public class LotteryServiceImpl implements LotteryService {
         List<LotteryItem> itemList = new ArrayList<>();
         //生成指定数量红包记录
         if(LotteryConstant.HB_TYPE_GROUP.equals(activity.getHbType())) {
-        //群红包活动生成指定数量红包记录，红包金额
-            itemList = wxLotteryA(activity);
+            //群红包活动生成指定数量红包记录，红包金额
+            if(LotteryConstant.AMT_TYPE_RAND.equals(activity.getAmType())){
+                itemList = wxLotteryRand(activity);
+            }else if(LotteryConstant.AMT_TYPE_NORMAL.equals(activity.getAmType())){
+                itemList = wxLotteryNormal(activity);
+            }
+
         }else if(LotteryConstant.HB_TYPE_NORMAL.equals(activity.getHbType())){
         //个人红包生成一条红包记录
             LotteryItem item = new LotteryItem();
@@ -54,7 +60,44 @@ public class LotteryServiceImpl implements LotteryService {
         return activity.getId();
     }
 
-    private List<LotteryItem> wxLotteryA(LotteryActivity activity){
+    @Override
+    public LotteryItem clickLottery(Long lotteryId) {
+        LotteryItem item = null;
+
+
+        try {
+            //判断该用户是否已经领取过本次活动红包 略
+
+            //从红包表取出一条红包记录返回，并修改该记录状态为已使用
+            item = lotteryItemMapper.getItemByLotteryId(lotteryId);
+            if(item!=null){
+
+                //修改红包状态
+                item.setIsOpen(Boolean.TRUE);
+                item.setModifyTime(new Date());
+                lotteryItemMapper.updateLotteryItem(item);
+                //4.插入一条数据到领取记录表 略
+            }
+
+            return item;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw  new ServiceException(e.getMessage());
+        }
+
+    }
+
+    @Override
+    public void updateLotteryItem(LotteryItem item) {
+        lotteryItemMapper.updateLotteryItem(item);
+    }
+
+    /**
+     * 生成随机红包
+     * @param activity
+     * @return
+     */
+    private List<LotteryItem> wxLotteryRand(LotteryActivity activity){
 
 		/*
 		 * 假如10块钱的红包分成5个最低1元
@@ -94,6 +137,42 @@ public class LotteryServiceImpl implements LotteryService {
             item.setModifyTime(new Date());
             items.add(item);
 //            System.out.println("第"+i+"个红包，金额为"+money/100f);
+        }
+        items.add(item);
+        return  items;
+    }
+
+    /**
+     * 生成普通红包
+     * @param activity
+     * @return
+     */
+    private List<LotteryItem> wxLotteryNormal(LotteryActivity activity){
+
+        /**
+         *  将金额平均分陪
+         */
+
+        List<LotteryItem> items = new ArrayList<>();
+        // 将单位转换为分为单位运算 降低运算发杂度
+        //单个红包最少金额
+        int min = 1;
+        //随机安全上限
+        int safeTotal ;
+        //累计已分配金额
+        int used=0 ;
+        Random ran = new Random();
+        LotteryItem item = null;
+        for(int i=1,num=activity.getTotalNum(),moneySum=(int)(activity.getTotalAmount()*100);i<=num;i++){
+            item = new LotteryItem();
+            item.setAmount(moneySum/(num*100f));
+            item.setIsOpen(Boolean.FALSE);
+            item.setLotteryId(activity.getId());
+            item.setWishing(activity.getWishing());
+            item.setCreateTime(new Date());
+            item.setModifyTime(new Date());
+            items.add(item);
+            System.out.println("第"+i+"个红包，金额为"+item.getAmount());
         }
         items.add(item);
         return  items;
