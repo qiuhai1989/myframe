@@ -2,6 +2,7 @@ package com.haiqiu.lottery.service.impl;
 
 import com.haiqiu.entity.Category;
 import com.haiqiu.lottery.dao.LotteryActivityMapper;
+import com.haiqiu.lottery.dao.LotteryItemMapper;
 import com.haiqiu.lottery.entity.LotteryActivity;
 import com.haiqiu.lottery.entity.LotteryConstant;
 import com.haiqiu.lottery.entity.LotteryItem;
@@ -25,6 +26,8 @@ public class LotteryServiceImpl implements LotteryService {
 
     @Autowired
     private LotteryActivityMapper lotteryActivityMapper;
+    @Autowired
+    private LotteryItemMapper lotteryItemMapper;
 
     @Override
     @Transactional
@@ -35,7 +38,6 @@ public class LotteryServiceImpl implements LotteryService {
         if(LotteryConstant.HB_TYPE_GROUP.equals(activity.getHbType())) {
         //群红包活动生成指定数量红包记录，红包金额
             itemList = wxLotteryA(activity);
-
         }else if(LotteryConstant.HB_TYPE_NORMAL.equals(activity.getHbType())){
         //个人红包生成一条红包记录
             LotteryItem item = new LotteryItem();
@@ -48,7 +50,7 @@ public class LotteryServiceImpl implements LotteryService {
             itemList.add(item);
 
         }
-
+        lotteryItemMapper.saveLotteryItemList(itemList);
         return activity.getId();
     }
 
@@ -83,14 +85,15 @@ public class LotteryServiceImpl implements LotteryService {
 
             }
             used+=money	;
-            System.out.println("used="+used);
+            System.out.println("used=" + used);
+            item.setAmount(money/100f);
             item.setIsOpen(Boolean.FALSE);
             item.setLotteryId(activity.getId());
             item.setWishing(activity.getWishing());
             item.setCreateTime(new Date());
             item.setModifyTime(new Date());
             items.add(item);
-            System.out.println("第"+i+"个红包，金额为"+money/100f);
+//            System.out.println("第"+i+"个红包，金额为"+money/100f);
         }
         items.add(item);
         return  items;

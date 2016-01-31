@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haiqiu.lottery.dao.LotteryItemMapper">
+
+<!--
+	<sql id="Base_Column_List" >
+		id, hb_type, am_type, wishing, sign, total_num, total_amount, create_time, modify_time
+	</sql>
+-->
+
+
+	<select id="saveLotteryItemList" parameterType="java.util.List">
+
+		insert into
+		Lottery_Item(lottery_id,amount,wishing,is_open,create_time,modify_time)
+		values
+		<foreach collection="list" item="item" index="index"
+				 separator=",">
+			(#{item.lotteryId,jdbcType=INTEGER},#{item.amount,jdbcType=FLOAT},#{item.wishing,jdbcType=VARCHAR},#{item.isOpen,jdbcType=BIT},#{item.createTime,jdbcType=DATE},#{item.createTime,jdbcType=DATE})
+		</foreach>
+	</select>
+
+</mapper>
