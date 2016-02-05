@@ -12,7 +12,7 @@
     <bean id="sayCN" class="hello.HelloServiceCNImpl"></bean>-->
 
 
-    <context:property-placeholder location="classpath:*.properties" />
+    <context:property-placeholder location="classpath:config/*.properties" />
 
     <context:component-scan base-package="com.haiqiu.serivce"  />
     <context:component-scan base-package="com.haiqiu.*.rest"  />
@@ -31,9 +31,9 @@
     </bean>
 
 
-    <import resource="spring-cxf.xml"/>
-    <import resource="spring-cxf-rest.xml"/>
-    <import resource="spring-mybatis.xml"/>
-    <import resource="spring-transaction.xml"/>
-    <import resource="spring-schedule.xml"/>
+    <import resource="spring/spring-cxf.xml"/>
+    <import resource="spring/spring-cxf-rest.xml"/>
+    <import resource="spring/spring-mybatis.xml"/>
+    <import resource="spring/spring-transaction.xml"/>
+    <import resource="spring/spring-schedule.xml"/>
 </beans>
