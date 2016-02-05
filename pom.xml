@@ -21,6 +21,7 @@
 		<version.aspectjweaver>1.8.4</version.aspectjweaver>
 		<version.mybatis>3.2.8</version.mybatis>
 		<version.mybatis-spring>1.2.2</version.mybatis-spring>
+		<version.quartz>2.2.1</version.quartz>
 	</properties>
 
 	<dependencies>
@@ -93,6 +94,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<!-- aspectjweaver(Spring依赖的jar)  -->
@@ -207,6 +213,23 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>${version.mybatis-spring}</version>
+		</dependency>
+		<!-- quartz spring 3.1以上才支持quartz 2.2.1 -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${version.quartz}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>c3p0</groupId>
+					<artifactId>c3p0</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz-jobs</artifactId>
+			<version>${version.quartz}</version>
 		</dependency>
 	</dependencies>
 	<build>
