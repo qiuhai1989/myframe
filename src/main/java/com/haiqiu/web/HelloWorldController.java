@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.List;
+import java.util.Properties;
 
 import com.alibaba.druid.pool.vendor.SybaseExceptionSorter;
 import com.haiqiu.entity.User;
@@ -13,6 +14,7 @@ import com.haiqiu.serivce.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +40,11 @@ public class HelloWorldController {
 	
 	@Autowired
 	private UserService userService;
-	
-	
+	@Value("#{p_common['max.count']}")
+	private String maxCount;
+	@Value("#{p_common}")
+	private Properties properties;
+
 	//http://localhost:8081/myframe/hello/sayHello/1.htmls?name=aa&age=15
 	/**
 	 * 访问数据模型 通过ModelAndView
@@ -58,6 +63,10 @@ public class HelloWorldController {
         System.out.println("**************");
         ModelAndView model = new ModelAndView("/user/success");
         model.addObject("info", info);
+
+		System.out.println("maxCount="+maxCount);
+		System.out.println(properties.getProperty("max.count"));
+
         return model;
     }
     
