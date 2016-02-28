@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.haiqiu.entity.User;
 import com.haiqiu.serivce.UserService;
 
-@Service("userService")
+@Service("userServiceImpl")
 public class UserServiceImpl implements UserService {
 
 	@Override

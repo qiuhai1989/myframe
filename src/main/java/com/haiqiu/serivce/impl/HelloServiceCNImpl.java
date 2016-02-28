@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  * Created by qiu on 2015/8/31.
  */
 
-@Service("helloSerivce")
+@Service("helloServiceCN")
 public class HelloServiceCNImpl implements HelloSerivce{
 
     public HelloServiceCNImpl(){

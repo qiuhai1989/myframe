@@ -30,5 +30,5 @@
     <import resource="spring/spring-cxf-rest.xml"/>
     <import resource="spring/spring-mybatis.xml"/>
     <import resource="spring/spring-transaction.xml"/>
-    <import resource="spring/spring-schedule.xml"/>
+<!--    <import resource="spring/spring-schedule.xml"/>-->
 </beans>
