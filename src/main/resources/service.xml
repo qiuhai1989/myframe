@@ -16,14 +16,9 @@
     <context:component-scan base-package="com.haiqiu.serivce"  />
     <context:component-scan base-package="com.haiqiu.*.rest"  />
     <context:component-scan base-package="com.haiqiu.*.service" />
+    <context:component-scan base-package="com.haiqiu.dao"  />
 
-   <bean id="categoryService" class="com.haiqiu.rest.CategoryService">
 
-    </bean>
-
-    <bean id="categoryDAO" class="com.haiqiu.dao.CategoryDAO">
-        <!--  wire dependency-->
-    </bean>
 
 
     <import resource="spring/spring-cxf.xml"/>

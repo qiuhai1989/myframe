@@ -11,6 +11,10 @@ import com.haiqiu.serivce.UserService;
 @Service("userServiceImpl")
 public class UserServiceImpl implements UserService {
 
+	public UserServiceImpl() {
+		super();
+	}
+
 	@Override
 	public List<User> getAllUser() {
 		// TODO Auto-generated method stub

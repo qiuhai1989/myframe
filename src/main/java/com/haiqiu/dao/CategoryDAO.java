@@ -1,6 +1,7 @@
 package com.haiqiu.dao;
 import com.haiqiu.entity.Book;
 import com.haiqiu.entity.Category;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,6 +12,7 @@ import java.util.Map;
  * DataAcess object for performing CRUD operations.
  * Dummy implementation.
  */
+@Component("categoryDAO")
 public class CategoryDAO {
 
     private static Map<String, Category> categoryMap = new HashMap<String, Category>();
