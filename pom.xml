@@ -255,7 +255,7 @@
 						<port>8081</port>
 					</httpConnector>
 					<scanIntervalSeconds>0</scanIntervalSeconds>
-					<webAppSourceDirectory>/myframe/src/main/webapp</webAppSourceDirectory>
+					<webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
 					<classesDirectory>target/classes</classesDirectory>
 					<!-- <contextXml>resources/webdefault.xml</contextXml> -->
 					<!--<stopKey>exit</stopKey> <stopPort>9090</stopPort> -->
