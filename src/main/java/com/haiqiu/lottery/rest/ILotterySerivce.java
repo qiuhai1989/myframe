@@ -14,11 +14,23 @@ import javax.ws.rs.core.Response;
 @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public interface ILotterySerivce {
 
+    /**
+     * 创建红包
+     * http://localhost:8081/myframe/services/rest/lottery/addlottery
+     * @param activity
+     * @return
+     */
     @POST
     @Path("/addlottery")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createLotteryActivity(LotteryActivity activity);
+
+    /**
+     * 抢红包
+     * @param lotteryId
+     * @return
+     */
     @GET
     @Path("/click")
     @Consumes(MediaType.APPLICATION_JSON)

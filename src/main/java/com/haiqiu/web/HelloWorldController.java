@@ -37,9 +37,10 @@ public class HelloWorldController {
 			.getLogger(HelloWorldController.class);
 	@Autowired
     private HelloSerivce helloSerivce;
-	
+
 	@Autowired
 	private UserService userService;
+
 	@Value("#{p_common['max.count']}")
 	private String maxCount;
 	@Value("#{p_common}")
