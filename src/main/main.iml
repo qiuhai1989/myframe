@@ -14,9 +14,14 @@
     <facet type="Spring" name="Spring">
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/resources/daos.xml</file>
+          <file>file://$MODULE_DIR$/resources/spring/spring-cxf.xml</file>
+          <file>file://$MODULE_DIR$/resources/spring/spring-mybatis.xml</file>
+          <file>file://$MODULE_DIR$/resources/spring/spring-cxf-rest.xml</file>
+          <file>file://$MODULE_DIR$/resources/spring/spring-schedule.xml</file>
+          <file>file://$MODULE_DIR$/resources/spring/spring-transaction.xml</file>
           <file>file://$MODULE_DIR$/resources/service.xml</file>
           <file>file://$MODULE_DIR$/resources/spring-mvc.xml</file>
+          <file>file://$MODULE_DIR$/resources/spring-client.xml</file>
         </fileset>
       </configuration>
     </facet>
