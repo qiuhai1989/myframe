@@ -9,5 +9,6 @@
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 
     <jaxws:client id="helloWsClient" serviceClass="demo.spring.service.HelloWorld"
-                  address="http://192.168.1.195:8081/myframe/services/HelloWorld"/>
+                  address="http://localhost:8081/myframe/services/HelloWorld"/>
+
 </beans>

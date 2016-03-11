@@ -56,7 +56,12 @@ public class LotteryServiceImpl implements LotteryService {
             itemList.add(item);
 
         }
-        lotteryItemMapper.saveLotteryItemList(itemList);
+        try {
+            lotteryItemMapper.saveLotteryItemList(itemList);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
         return activity.getId();
     }
 
