@@ -55,6 +55,7 @@ public class FileController {
                         String suffixName = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
                         String newFileName = preName.concat(suffixName);
                         //定义文件上传路径
+                        //如果用jetty 则用"/" 代替File.separator
                         File uploadDir = new File(request.getServletContext().getRealPath(File.separator).concat("uploadFile"));
                         if(!uploadDir.exists()){
                             uploadDir.mkdirs();
