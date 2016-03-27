@@ -22,6 +22,14 @@
 		<version.mybatis>3.2.8</version.mybatis>
 		<version.mybatis-spring>1.2.2</version.mybatis-spring>
 		<version.quartz>2.2.1</version.quartz>
+
+		<tomcat7.port>8081</tomcat7.port>
+		<tomcat7.path>/myframe</tomcat7.path>
+
+		<version.maven-surefire-plugin>2.12</version.maven-surefire-plugin>
+		<version.maven-eclipse-plugin>2.9</version.maven-eclipse-plugin>
+		<version.maven-war-plugin>2.2</version.maven-war-plugin>
+		<version.tomcat7-maven-plugin>2.0</version.tomcat7-maven-plugin>
 	</properties>
 
 	<dependencies>
@@ -261,6 +269,29 @@
 					<!--<stopKey>exit</stopKey> <stopPort>9090</stopPort> -->
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>${version.tomcat7-maven-plugin}</version>
+				<configuration>
+					<port>${tomcat7.port}</port>
+					<path>${tomcat7.path}</path>
+					<uriEncoding>utf-8</uriEncoding>
+					<ignorePackaging>true</ignorePackaging>
+
+					<maxHttpHeaderSize>8192</maxHttpHeaderSize>
+					<bufferSize>40960</bufferSize>
+					<acceptCount>300</acceptCount>
+					<socketBuffer>-1</socketBuffer>
+
+					<systemProperties>
+						<tomcatName>tomcat-${project.name}</tomcatName>
+						<JAVA_OPTS>-Xms256m -Xmx1024m -XX:MaxPermSize=256m</JAVA_OPTS>
+					</systemProperties>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>

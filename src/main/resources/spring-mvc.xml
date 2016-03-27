@@ -29,4 +29,24 @@
         <bean id="MyInterceptor3" class="com.haiqiu.interceptor.MyInterceptor3"></bean>
     </mvc:interceptors>
 
+    <!-- 文件上传 -->
+    <!--
+     首 先，DispatcherServlet必须找到一个文件上传解析器的实例，使用这个实例来检查本次请求的HttpServletRequest是否是一 个分段文件上传的Request,通过下面的Spring 源码可以看到，
+     首先必须保证有一个MultipartResolver的实例，并且由该类的Resolver的isMultipart方法来验证，
+     本次 Request是否为文件上传的Request.如果以上条件都满足，那么Spring将其转换为一个继承自HttpServletRequest的 MultipartHttpServletRequest返回，
+     这样在你的Controller中就可以使用这个经过转换的request，从中取到 MultipartFile信息。
+
+     -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+        <property name="maxUploadSize">
+            <value>32505856</value><!--上传文件大小限制为31M，31*1024*1024  -->
+        </property>
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
+    </bean>
+
 </beans>

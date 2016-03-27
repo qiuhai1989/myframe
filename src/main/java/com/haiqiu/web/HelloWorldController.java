@@ -84,12 +84,12 @@ public class HelloWorldController {
     	return "/user/hello";
     }
     
-/*    @ModelAttribute("user")
+   @ModelAttribute("user")
     public User getUser(){
     	User user = new User();
     	user.setId(1001); 
     	return user;
-    }*/
+    }
     //http://localhost:8081/myframe/hello/handle71.htmls
     @RequestMapping(value = "/handle71")
 	public String  handle71(@ModelAttribute("user") User user){
