@@ -14,7 +14,7 @@
     <context:property-placeholder location="classpath:config/*.properties" />
 
     <context:component-scan base-package="com.haiqiu.serivce"  />
-    <context:component-scan base-package="com.haiqiu.*.rest"  />
+    <context:component-scan base-package="com.haiqiu.**.rest"  />
     <context:component-scan base-package="com.haiqiu.*.service" />
     <context:component-scan base-package="com.haiqiu.dao"  />
 
@@ -26,4 +26,5 @@
     <import resource="spring/spring-mybatis.xml"/>
     <import resource="spring/spring-transaction.xml"/>
 <!--    <import resource="spring/spring-schedule.xml"/>-->
+   <import resource="spring/spring-mybatis2.xml"/>
 </beans>

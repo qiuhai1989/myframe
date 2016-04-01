@@ -27,6 +27,7 @@ public class ILotterySerivceImpl implements ILotterySerivce {
     @Autowired
     private LotteryService lotteryService;
 
+
     @Override
     public Response createLotteryActivity(LotteryActivity activity) {
 
