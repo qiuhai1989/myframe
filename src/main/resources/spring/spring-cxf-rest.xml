@@ -34,6 +34,7 @@
         <jaxrs:serviceBeans>
             <ref bean="categoryService" />
             <ref bean="ILotterySerivceImpl"/>
+            <ref bean="NatureImpl"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>
             <!-- JSON格式转换 -->

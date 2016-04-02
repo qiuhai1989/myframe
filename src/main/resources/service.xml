@@ -19,8 +19,6 @@
     <context:component-scan base-package="com.haiqiu.dao"  />
 
 
-
-
     <import resource="spring/spring-cxf.xml"/>
     <import resource="spring/spring-cxf-rest.xml"/>
     <import resource="spring/spring-mybatis.xml"/>
