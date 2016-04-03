@@ -35,7 +35,7 @@ public class InvokeFaultExceptionMapper implements ExceptionMapper {
 			ServiceExceptionEntity entity = new ServiceExceptionEntity(e.getCode(), e.getMsg());
 			rb.entity(entity);
 		} else {
-			ServiceExceptionEntity entity = new ServiceExceptionEntity(500, "系统异常");
+			ServiceExceptionEntity entity = new ServiceExceptionEntity(500, ex.getMessage());
 			rb.entity(entity);
 		}
 		rb.language(Locale.SIMPLIFIED_CHINESE);

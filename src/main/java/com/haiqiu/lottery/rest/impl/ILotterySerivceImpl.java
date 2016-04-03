@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import javax.ws.rs.core.Response;
 import java.util.Date;
@@ -32,27 +33,24 @@ public class ILotterySerivceImpl implements ILotterySerivce {
     public Response createLotteryActivity(LotteryActivity activity) {
 
         //鉴权判断 略
-
-        if(StringUtils.isEmpty(activity.getHbType())){
+        Assert.hasText(activity.getHbType(),"红包类型不能为空");
+/*        if(StringUtils.isEmpty(activity.getHbType())){
             throw  new ServiceException("红包类型不能为空");
-        }
-        if(activity.getTotalAmount()==null||activity.getTotalAmount().floatValue()<0){
+        }*/
+
+        Assert.state(activity.getTotalAmount().floatValue()>0,"红包金额必须大于0");
+
+/*        if(activity.getTotalAmount()==null||activity.getTotalAmount().floatValue()<0){
             throw  new ServiceException("红包金额必须大于0");
-        }
+        }*/
         if("GROUP".equals(activity.getHbType())){
-            if(!(activity.getTotalNum().intValue()>0)){
-                throw  new ServiceException("红包数量必须大于1");
-            }
-            if(StringUtils.isEmpty(activity.getAmType())){
-                throw  new ServiceException("红包金额设置方式必须指定");
-            }
-            if(activity.getTotalAmount()>5000f){
-                throw  new ServiceException("红包金额不能超过5000");
-            }
+
+            Assert.state(activity.getTotalNum().intValue()>0,"红包金额必须大于0");
+            Assert.hasText(activity.getAmType(),"红包金额设置方式必须指定");
+            Assert.state(activity.getTotalAmount()<5000f,"红包金额不能超过5000");
         }else if("NORMAL".equals(activity.getHbType())){
-            if(activity.getTotalAmount()>200f){
-                throw  new ServiceException("红包金额不能超过200");
-            }
+            Assert.state(activity.getTotalNum().intValue()>0,"红包金额必须大于0");
+            Assert.state(activity.getTotalAmount()<200f,"红包金额不能超过200");
         }
 
         Long lotteryId =  lotteryService.addLotteryActivity(activity);

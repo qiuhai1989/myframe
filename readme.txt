@@ -1,2 +1,2 @@
-1.Ôö¼Óspring  util:properties ÓÃ·¨
-2.ddd
+1.å¢åŠ spring  util:properties
+2.å¢åŠ Assert æ–­è¨€åˆ¤æ–­ å‚è€ƒ ILotterySerivceImpl
